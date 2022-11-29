@@ -1,34 +1,34 @@
-name: Python CI
+name: Python test
 
-on:
-  workflow_dispatch:
-  push:
+on:                             
+  workflow_dispatch:              
+  push:                          
     branches:
       - main
+      - master        
 
-jobs:
-  tests:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v3
-        name : Checkout my project
-      - name: Install Python 3.10
-        uses : actions/setup-python@v4
+jobs:                           
+  tests:                          
+    runs-on: ubuntu-latest         
+    steps:                          
+      - uses: actions/checkout@v3     
+      
+      - name: Print folder            
+        run: |                        
+          ls
+      - name: Python installation 3.10
+        uses: actions/setup-python@v4
         with:
           python-version: "3.10"
-      - name : Install requirements
+
+      - name: install requirement
         run: |
           python -m pip install -r requirements.txt
-
-      - name : Pylint
-        run : |
-          python -m pylint application
-
-      - name : Pytest
-        run : |
+      - name: Pylint
+        run: |
+          python -m pylint application/tests/
+      - name: Pytest
+        run: |
           python -m pytest
 
-
-
-
+          
