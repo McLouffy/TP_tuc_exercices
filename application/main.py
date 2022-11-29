@@ -1,23 +1,18 @@
-import math
-from fastapi import FastAPI
+import pandas as pd;
 
-app = FastAPI()
+def load_data():
+    df = pd.read_csv('data/cards.csv')
+    return df
 
+def get_random_cards():
+    data = load_data()
+    df_load = data.sample(n=10)
+    return df_load
 
-@app.get("/")
-def home():
-    return "Hello World"
-
-
-@app.get("/{number}")
-def return_square(number: int):
-    return get_square(number)
-
-
-@app.get("/twice/{number}")
-def return_square_twice(number: int):
-    return get_square(number) + get_square(number)
-
-
-def get_square(number: int):
-    return math.floor(math.pow(number, 2))
+def print_random_cards():
+    random_data = get_random_cards()
+    message = ""
+    for index, row in random_data.iterrows():
+        message += 'id :' + str(row["cid"]) + ' | ' + 'Nom : ' + str(row["cname"])+' | '+ 'Type :' +str(row["type"]) +"\n"
+    print(message)
+    return message

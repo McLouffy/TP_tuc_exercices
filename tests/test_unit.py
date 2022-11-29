@@ -1,22 +1,20 @@
-import math
-from fastapi.testclient import TestClient
 import pytest
-from application.main import app
-from random import randint
-client = TestClient(app)
 
+from application.main import get_random_cards, load_data, print_random_cards
 
-def test_home():
-    response = client.get("/")
-    assert response.status_code == 200
-    assert response.json() == "Hello World"
+def test_load_data():
+    data = load_data()
+    assert data is not None
+#Create a test function who test get_random_cards() works and return 10 random cards
 
+def test_get_random_cards():
+    random_cards = get_random_cards()
+    assert random_cards is not None
+    assert len(random_cards) == 10
 
-list_of_numbers = [randint(1, 10) for i in range(0, 10)]
+#Create a tests function who test print_random_cards() works
 
-
-@pytest.mark.parametrize('number', list_of_numbers)
-def test_return_square_twice(number: int):
-    response = client.get(f"/twice/{number}")
-    assert response.status_code == 200
-    assert response.json() == math.pow(number, 2)*2
+def test_print_random_cards():
+    message = print_random_cards()
+    assert message is not None
+    assert message != ""

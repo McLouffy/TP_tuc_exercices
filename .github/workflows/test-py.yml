@@ -27,6 +27,11 @@ jobs:
       - name: lancement Pytest
         run: |
           python -m pytest
+
+      - name: test main
+        run: |
+          python -m 
+
       - name: lancement pylint
         run: |
           python -m pylint application/
