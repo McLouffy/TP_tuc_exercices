@@ -27,3 +27,10 @@ jobs:
       - name: Pytest
         run: |
           python -m pytest
+      - name: Coverage
+        run: |
+          coverage run -m pytest --profile --color=yes
+          coverage report -m
+      - name: Pylint
+        run: |
+          python --exit-zero --output-format=colorized application/ tests/
