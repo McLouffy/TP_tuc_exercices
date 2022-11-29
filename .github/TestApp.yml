@@ -1,11 +1,10 @@
-name: Python application
+name: Python CI
 
-on:                             
-  workflow_dispatch:              
-  push:                          
+on:
+  workflow_dispatch:
+  push:
     branches:
-      - main        
-
+      - main
 jobs:                           
   tests:                          
     runs-on: ubuntu-latest         
@@ -28,6 +27,6 @@ jobs:
       - name: Test run application 
         run: |
           python application/main.py
-
-      
-          
+      - name: Pytest
+        run: |
+          python -m pytest
